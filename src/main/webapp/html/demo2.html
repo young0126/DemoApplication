@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>drag and drop</title>
+<style type="text/css">
+	div{
+	width: 230px;
+	height: 250px;
+	border-color: black;
+	border: 1px solid #aaaaaa;
+	background-image: url("../img/3.jpg");
+	}
+	video{
+	margin: 30px;
+	}
+</style>
+</head>
+<body>
+	<div style="float: left;" ondragover="allowDrop(event)" ondrop="dropTarget(event)">
+	</div>
+	<div style="background-image: url(''); float: left;border: 0px solid #aaaaaa" >
+	</div>
+	<div style="float: left;" ondragover="allowDrop(event)" ondrop="dropTarget(event)">
+	</div>
+	<span style="margin-left: 30px">
+		<video id="vedio1"  src="../video/movie.ogg" width="180px" height="180px" autoplay preload controls="controls" loop draggable="true" ondragstart="start(event)">
+			你的浏览器不支持该视频播放！
+		</video>
+	</span>
+</body>
+<script type="text/javascript">
+	function start(ev){
+		//设置传递的数据
+		ev.dataTransfer.setData("Text",ev.target.id);
+	}
+	function allowDrop(ev){
+		//去除默认的属性
+		ev.preventDefault();
+	}
+	function dropTarget(ev){
+		var data = ev.dataTransfer.getData("Text");
+		ev.target.appendChild(document.getElementById(data));
+		if(document.getElementById(data).paused== true){
+			document.getElementById(data).play();
+		}else{
+			document.getElementById(data).paused();
+		}
+	}
+</script>
+</html>
